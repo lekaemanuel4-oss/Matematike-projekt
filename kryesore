@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Time Optimizer - Fillimi</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; text-align: center; }
+h1 { color: #333; }
+p { max-width: 600px; margin: auto; font-size: 1.1em; }
+.nav { margin-top: 20px; }
+.nav a { display: inline-block; margin: 5px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
+.nav a:hover { background-color: #45a049; }
+</style>
+</head>
+<body>
+<h1>Miresevini te Smart Study Time Optimizer</h1>
+<p>Kjo faqe ndihmon nxënësit të ndajnë kohën e studimit në mënyrë optimale sipas prioritetit, vështirësisë dhe përgatitjes për secilën lëndë. Maksimizo produktivitetin dhe shmang lodhjen!</p>
+<div class="nav">
+<a href="kalkuatori">Kalkulatori</a>
+<a href="formulat">Formulat</a>
+</div>
+</body>
+</html>
