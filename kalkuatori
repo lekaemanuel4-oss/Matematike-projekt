@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Time Optimizer - Kalkulatori</title>
+<style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f7f7f7; }
+    h1 { text-align: center; color: #333; }
+    input { margin: 5px 0; padding: 5px; width: 60px; }
+    label { display: inline-block; width: 150px; }
+    .subject { margin-bottom: 10px; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    #results { margin-top: 20px; }
+    .bar { height: 25px; margin: 5px 0; background-color: #4CAF50; color: white; text-align: right; padding-right: 5px; }
+    .error { color: red; }
+    .field-error { color: #b30000; font-size: 0.9em; margin-top: 4px; min-height: 1.2em; text-align: left; }
+    .input-error { outline: 2px solid rgba(255,0,0,0.25); border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>Smart Study Time Optimizer</h1>
+<label>Koha totale e studimit (orë):</label>
+<input type="number" id="totalTime" value="6" step="0.1">
+<div id="totalTimeError" class="field-error" aria-live="polite"></div>
+<br><br>
+<label>Numri i lëndëve:</label>
+<input type="number" id="numSubjects" value="3">
+<div id="numSubjectsError" class="field-error" aria-live="polite"></div>
+<br>
+<button onclick="generateSubjects()">Gjenero Lëndët</button>
+<div id="subjectsContainer"></div>
+<button onclick="calculateTime()">Llogarit Kohën Optimum</button>
+<div id="results"></div>
+<script>
+function generateSubjects() {
+    const n = parseInt(document.getElementById('numSubjects').value);
+    const container = document.getElementById('subjectsContainer');
+    container.innerHTML = '';
+    for (let i = 1; i <= n; i++) {
+        const div = document.createElement('div');
+        div.className = 'subject';
+        div.innerHTML = `<b>Lënda ${i}</b><br>
+            <label>Emri i lëndës:</label><input type='text' class='subjectName'><div class='field-error name-error' aria-live='polite'></div><br>
+            <label>Prioriteti (1-5):</label><input type='number' min='1' max='5' step='0.1' class='priority'><div class='field-error priority-error' aria-live='polite'></div><br>
+            <label>Vështirësia (1-5):</label><input type='number' min='1' max='5' step='0.1' class='difficulty'><div class='field-error difficulty-error' aria-live='polite'></div><br>
+            <label>Përgatitja (1-5):</label><input type='number' min='1' max='5' step='0.1' class='preparedness'><div class='field-error preparedness-error' aria-live='polite'></div><br>`;
+        container.appendChild(div);
+    }
+}
+generateSubjects();
+
+function calculateTime() {
+    const totalTimeEl = document.getElementById('totalTime');
+    const T = parseFloat((totalTimeEl.value || '').toString().replace(',','.'));
+
+    const namesEls = Array.from(document.getElementsByClassName('subjectName'));
+    const prioritiesEls = Array.from(document.getElementsByClassName('priority'));
+    const difficultiesEls = Array.from(document.getElementsByClassName('difficulty'));
+    const preparednessEls = Array.from(document.getElementsByClassName('preparedness'));
+
+    // Clear previous errors
+    const totalErr = document.getElementById('totalTimeError'); if(totalErr) totalErr.textContent = '';
+    const numErr = document.getElementById('numSubjectsError'); if(numErr) numErr.textContent = '';
+    namesEls.forEach(el=>{
+        const row = el.parentElement;
+        row.querySelectorAll('.field-error').forEach(fe=>fe.textContent='');
+        row.querySelectorAll('input').forEach(inp=>inp.classList.remove('input-error'));
+    });
+    totalTimeEl.classList.remove('input-error');
+
+    let hasError = false;
+
+    if (isNaN(T) || T <= 0) {
+        if(totalErr) totalErr.textContent = 'Vendosni një kohë valide (p.sh. 4 ose 4,5).';
+        totalTimeEl.classList.add('input-error');
+        hasError = true;
+    }
+
+    for (let i=0; i<namesEls.length; i++) {
+        const row = namesEls[i].parentElement;
+        const nameVal = namesEls[i].value.trim();
+        const pVal = parseFloat((prioritiesEls[i].value || '').toString().replace(',','.'));
+        const dVal = parseFloat((difficultiesEls[i].value || '').toString().replace(',','.'));
+        const eVal = parseFloat((preparednessEls[i].value || '').toString().replace(',','.'));
+
+        if (!nameVal) {
+            const el = row.querySelector('.name-error'); if(el) el.textContent = 'Vendosni emrin e lëndës.';
+            namesEls[i].classList.add('input-error'); hasError = true;
+        }
+        if (isNaN(pVal) || pVal < 1 || pVal > 5) {
+            const el = row.querySelector('.priority-error'); if(el) el.textContent = 'Prioriteti duhet të jetë 1–5 (p.sh. 3,5).';
+            prioritiesEls[i].classList.add('input-error'); hasError = true;
+        }
+        if (isNaN(dVal) || dVal < 1 || dVal > 5) {
+            const el = row.querySelector('.difficulty-error'); if(el) el.textContent = 'Vështirësia duhet të jetë 1–5.';
+            difficultiesEls[i].classList.add('input-error'); hasError = true;
+        }
+        if (isNaN(eVal) || eVal < 1 || eVal > 5) {
+            const el = row.querySelector('.preparedness-error'); if(el) el.textContent = 'Përgatitja duhet të jetë 1–5.';
+            preparednessEls[i].classList.add('input-error'); hasError = true;
+        }
+    }
+
+    if (hasError) {
+        const firstErr = document.querySelector('.input-error'); if(firstErr) firstErr.focus();
+        document.getElementById('results').innerHTML = '';
+        return;
+    }
+
+    const priorities = prioritiesEls.map(i => parseFloat((i.value || '').toString().replace(',','.')));
+    const difficulties = difficultiesEls.map(i => parseFloat((i.value || '').toString().replace(',','.')));
+    const preparedness = preparednessEls.map(i => parseFloat((i.value || '').toString().replace(',','.')));
+    const names = namesEls.map((el, idx) => el.value.trim() || ('Lënda '+(idx+1)));
+
+    let N = priorities.map((p, idx) => (p * difficulties[idx]) / preparedness[idx]);
+    const Ntotal = N.reduce((a,b)=>a+b,0);
+    let t = N.map(n => T * n / Ntotal);
+
+    function productivity(ti) { return 100 * Math.exp(-0.15 * ti); }
+    const E = t.reduce((sum, ti) => sum + ti * productivity(ti), 0);
+
+    const results = document.getElementById('results');
+    results.innerHTML = `<h2>Kohë Optimum për Lëndët</h2>`;
+    t.forEach((ti, idx) => {
+        const bar = `<div class='bar' style='width:${ti/T*100}%'>${names[idx]}: ${ti.toFixed(2)} orë</div>`;
+        results.innerHTML += bar;
+    });
+    results.innerHTML += `<p>Efikasiteti Total: ${E.toFixed(2)}</p>`;
+    results.innerHTML += `<p><i>Këshillë: Merr një pushim çdo 45-60 minuta për të ruajtur produktivitetin!</i></p>`;
+}
+</script>
+
+<div class="nav">
+<a href="kryesore">Faqja Kryesore</a>
+<a href="formulat">Formulat</a>
+<a href="Efikasitet">Efikasiteti</a>
+</div>
+</body>
+</html>
