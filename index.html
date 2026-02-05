@@ -5,20 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Study Time Optimizer - Fillimi</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; text-align: center; }
-h1 { color: #333; }
-p { max-width: 600px; margin: auto; font-size: 1.1em; }
-.nav { margin-top: 20px; }
-.nav a { display: inline-block; margin: 5px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
-.nav a:hover { background-color: #45a049; }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+/* BODY */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+/* KONTAINER */
+.container {
+    width: 95%;
+    max-width: 1000px;
+    margin-top: 50px;
+}
+
+/* TITULLI */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* PARAGRAFI */
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* LEAD / intro highlight */
+.lead {
+    
+    padding: 18px 22px;
+    border-radius: 20px;
+    margin: 0 auto 30px;
+    max-width: 900px;
+    font-size: 1.05em;
+    line-height: 1.6;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.32);
+    color: #fff;
+}
+
+.lead::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: rgba(255,255,255,0.14);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+/* SECTIONS CONTAINER */
+.sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+        gap: 32px;
+}
+
+/* SECILA KUTI */
+.section {
+    flex: 1 1 300px; /* desktop: 3 per rresht */
+    border-radius: 15px;
+    padding: 30px 20px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    background-size: 400% 400%;
+    animation: gradientMove 8s ease infinite, float 4s ease-in-out infinite;
+}
+
+.section h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+}
+
+.section p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+/* Ngjyra / gradient animuar për secilën section */
+#kalkuatori {
+    background: linear-gradient(-45deg,  #467cf9, #eb0d0d);
+}
+#formulat {
+    background: linear-gradient(-45deg, #f6ff00, #9500ff);
+}
+#efikasitet {
+    background: linear-gradient(-45deg, #cf09ee,  #36ff04);
+}
+
+/* Hover efekt */
+.section:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+
+/* Animacion gradient i lëvizshëm */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animacion float */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .section { flex: 1 1 45%; min-height: 180px; }
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2em; }
+    p { font-size: 1em; margin-bottom: 30px; }
+    .section { flex: 1 1 90%; min-height: 150px; font-size: 0.95em; padding: 25px 15px; }
+    .section h2 { font-size: 1.3em; }
+}
 </style>
 </head>
 <body>
-<h1>Miresevini te Smart Study Time Optimizer</h1>
-<p>Kjo faqe ndihmon nxënësit të ndajnë kohën e studimit në mënyrë optimale sipas prioritetit, vështirësisë dhe përgatitjes për secilën lëndë. Maksimizo produktivitetin dhe shmang lodhjen!</p>
-<div class="nav">
-<a href="kalkuatori.html">kalkulatori</a>
-<a href="formulat.html">formulat</a>
+<div class="container">
+    <h1>Smart Study Time Optimizer</h1>
+    <p class="lead">Kjo faqe ndihmon nxënësit të ndajnë kohën e studimit në mënyrë optimale sipas prioritetit, vështirësisë dhe përgatitjes për secilën lëndë. Maksimizo produktivitetin dhe shmang lodhjen!</p>
+    
+    <div class="sections">
+        <div class="section" id="kalkuatori" onclick="location.href='kalkuatori'">
+            <h2>Calculator për Kohën e Studimit</h2>
+            <p>Llogarit kohën optimale për secilën lëndë bazuar në numrin e orëve dhe prioritetet e tua.</p>
+        </div>
+        <div class="section" id="efikasitet" onclick="location.href='Efikasitet'">
+            <h2>Efikasiteti</h2>
+            <p>Ndërto dhe monitoro efikasitetin tënd të studimit për të marrë maksimumin nga koha e shpenzuar.</p>
+        </div>
+        <div class="section" id="formulat" onclick="location.href='formulat'">
+            <h2>Formulat</h2>
+            <p>Shiko të gjitha formulat matematikore që janë përdorur për të optimizuar studimin dhe për të matur efikasitetin.</p>
+        </div>
+    </div>
 </div>
 </body>
 </html>
