@@ -4,33 +4,217 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koha Optimum Pa Pushim</title>
-</head> 
-<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body { font-family: Arial, sans-serif; padding: 20px; background: #f7f7f7; text-align: center; }
-h1 { color: #333; }
-label { font-weight: bold; margin-right: 5px; }
-input { padding: 5px; width: 60px; margin: 5px; }
-button { padding: 10px 20px; margin-top: 10px; cursor: pointer; }
-#result { margin-top: 20px; font-size: 1.2em; font-weight: bold; }
-.back-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #f44336; color: white; text-decoration: none; border-radius: 5px; }
-.back-btn:hover { background-color: #d32f2f; }
-.bar-container { width: 100%; background: #ddd; height: 30px; margin-top: 10px; border-radius: 5px; }
-.bar { height: 100%; text-align: right; padding-right: 5px; color: white; border-radius: 5px; transition: width 0.5s; }
+/* Body & Fonts */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    text-align: center;
+    color: #333;
+}
+
+/* Titles */
+h1, h2, h3 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+h1 { font-size: 2.5em; margin-top: 20px; }
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.4em; }
+
+/* Card Styles */
+.section-card {
+    background: linear-gradient(145deg, #ffffff, #f0f4f8);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 650px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.section-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+}
+
+/* Labels & Inputs */
+label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+input {
+    padding: 8px;
+    width: 80px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    transition: 0.3s;
+}
+input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+
+/* Buttons */
+button {
+    padding: 14px 30px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #4CAF50, #2ecc71);
+    color: white;
+    font-size: 1em;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+button:hover {
+    background: linear-gradient(45deg, #43a047, #27ae60);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Result Text */
+#result, #efficiencyAdvice {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* Bar Containers */
+.bar-container {
+    width: 100%;
+    background: #eee;
+    height: 40px;
+    margin-top: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Bars */
+.bar {
+    height: 100%;
+    text-align: right;
+    padding-right: 12px;
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 700;
+    transition: width 1s ease, background-color 0.5s ease, box-shadow 0.5s;
+    box-shadow: 0 0 5px rgba(0,0,0,0.15);
+}
+.bar:hover {
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+}
+
+/* Specific Bars Gradient */
+#efficiencyBar { background: linear-gradient(90deg, #4caf50, #81c784); }
+#studyBar { background: linear-gradient(90deg, #4CAF50, #2ecc71); }
+#breakBar { background: linear-gradient(90deg, #3498db, #5dade2); }
+
+/* Footer Buttons */
+.footer-buttons {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.nav-btn {
+    background: linear-gradient(135deg, #4CAF50, #2ecc71);
+    color: white;
+    text-decoration: none;
+    padding: 20px 40px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.nav-btn:hover {
+    background: linear-gradient(135deg, #43a047, #27ae60);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    input { width: 60px; }
+    button { padding: 14px 24px; font-size: 0.95em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+    .footer-buttons { flex-direction: column; gap: 18px; }
+    .nav-btn { padding: 16px 28px; font-size: 1em; }
+}
 </style>
+</head>
+<body>
 
-
-
-
-<h2>Efikasiteti Momental</h2>
-<label>Orët që keni studiuar pa pushim:</label>
+<!-- Section 1: Efikasiteti Momental -->
+<div class="section-card">
+<h2>Efikasiteti Momental ⏱</h2>
+Shpjegim: Ky seksion ju ndihmon të vlerësoni efikasitetin tuaj aktual të studimit bazuar në kohën që keni kaluar pa pushim. Futni orët që keni studiuar dhe merrni një vlerësim të efikasitetit tuaj aktual.
+<br><br>
+<label>Orët që keni studiuar/do të studioni pa pushim:</label>
 <input type="number" id="hoursWithoutBreak" value="0" step="0.1">
 <button onclick="showCurrentEfficiency()">Llogarit Efikasitetin</button>
 
-<div id="efficiencyBarContainer" style="width: 100%; background: #ddd; height: 30px; margin-top: 10px; border-radius: 5px;">
-  <div id="efficiencyBar" style="height: 100%; width: 0%; text-align: right; padding-right: 5px; color: white; border-radius: 5px;">0%</div>
+<div class="bar-container">
+  <div id="efficiencyBar" class="bar" style="width:0%;">0%</div>
 </div>
-<p id="efficiencyAdvice" style="font-style: italic; margin-top: 5px;"></p>
+<p id="efficiencyAdvice" style="font-style: italic;"></p>
+</div>
+
+<!-- Section 2: Koha Optimum e Studimit -->
+<div class="section-card">
+<h1>Koha Optimale e Studimit dhe Pushimi i Sugjeruar</h1>
+Vendos koha totale që ke në dispozicion për studim dhe parametrat e efikasitetit për të llogaritur kohën optimale të studimit pa pushim dhe pushimin e rekomanduar për të ruajtur efikasitetin.
+<br><br>
+<label>Koha totale për të studiuar (T) në orë:</label>
+<input type="number" id="totalHours" value="4" step="0.1" min="0"><br>
+<br> 
+<label>Efikasiteti minimal (%) që dëshiron të ruash (max 95%):</label>
+<input type="number" id="Pmin" value="70" min="1" max="95"><br>
+
+<label>Përqindja e rikuperimit të efikasitetit të trurit tënd (r) me anë të pushimit (%):</label>
+<input type="number" id="recoverPercent" value="20" min="0" max="100"><br>
+
+<button onclick="calculateOptimal()">Llogarit Koha dhe Pushimin</button>
+
+<div id="result"></div>
+
+<h3>Shiriti i Kohës së Studimit</h3>
+<div class="bar-container">
+    <div id="studyBar" class="bar" style="width:0%;">0h</div>
+</div>
+
+<h3>Shiriti i Pushimit të Rekomanduar</h3>
+<div class="bar-container">
+    <div id="breakBar" class="bar" style="width:0%;">0h</div>
+</div>
+</div>
+
+<!-- Footer Buttons -->
+<div class="footer-buttons">
+  <a href="index.html" class="nav-btn"> Faqja Kryesore</a>
+  <a href="kalkuatori.html" class="nav-btn"> Kalkulatori</a>
+  <a href="formulat.html" class="nav-btn"> Faqja e Formulave</a>
+</div>
+
 
 <script>
 function showCurrentEfficiency() {
@@ -42,57 +226,21 @@ function showCurrentEfficiency() {
     bar.textContent = Ecurrent.toFixed(1) + '%';
     
     if(Ecurrent > 80){
-        bar.style.backgroundColor = '#4CAF50'; // gjelbër
+        bar.style.background = 'linear-gradient(90deg, #4CAF50, #81c784)';
         document.getElementById('efficiencyAdvice').textContent = 'Efikasitet i lartë! Mund të vazhdosh.';
     } else if(Ecurrent > 60){
-        bar.style.backgroundColor = '#FFEB3B'; // verdhë
+        bar.style.background = 'linear-gradient(90deg, #FFEB3B, #f9e79f)';
         document.getElementById('efficiencyAdvice').textContent = 'Efikasitet mesatar. Merr parasysh një pushim të shkurtër.';
     } else {
-        bar.style.backgroundColor = '#F44336'; // e kuqe
+        bar.style.background = 'linear-gradient(90deg, #F44336, #e57373)';
         document.getElementById('efficiencyAdvice').textContent = 'Efikasitet i ulët! Duhet patjetër një pushim.';
     }
 }
-</script>
 
-<break>
-</break>
-
-
-
-<h1>Koha Optimum e Studimit</h1>
-
-<div class="section">
-<h2>Koha Optimum Pa Pushim dhe Pushimi i sugjeruar</h2>
-
-<label>Koha totale për të studiuar (T) në orë:</label>
-<input type="number" id="totalHours" value="4" step="0.1" min="0"><br>
-
-<label>Efikasiteti minimal (%) që dëshiron (max 95%):</label>
-<input type="number" id="Pmin" value="70" min="1" max="95"><br>
-
-<label>Përqindja e rikuperimit të efikasitetit (r) pas pushimit (%):</label>
-<input type="number" id="recoverPercent" value="20" min="0" max="100"><br>
-
-<button onclick="calculateOptimal()">Llogarit Koha dhe Pushimin</button>
-
-<div id="result"></div>
-
-<h3>Shiriti i Kohës së Studimit</h3>
-<div class="bar-container">
-    <div id="studyBar" class="bar" style="width:0%; background-color:#4CAF50;"></div>
-</div>
-
-<h3>Shiriti i Pushimit të Rekomanduar</h3>
-<div class="bar-container">
-    <div id="breakBar" class="bar" style="width:0%; background-color:#3498db;"></div>
-</div>
-</div>
-
-<script>
 function calculateOptimal() {
     const T = parseFloat(document.getElementById('totalHours').value);
     let Pmin = parseFloat(document.getElementById('Pmin').value);
-    let r = parseFloat(document.getElementById('recoverPercent').value)/100; // 0-1
+    let r = parseFloat(document.getElementById('recoverPercent').value)/100;
 
     if(Pmin > 95) Pmin = 95;
     if(T <=0 || Pmin <=0 || r<0 || r>1){
@@ -100,37 +248,28 @@ function calculateOptimal() {
         return;
     }
 
-    // Parametrat për efikasitet
-    const E0 = 95;      // Efikasitet maksimal fillestar
-    const Emin = 50;    // Efikasitet minimal absolut
+    const E0 = 95;      
+    const Emin = 50;    
 
-    // Koha optimale pa pushim proporcional me T
-    const proportion = 1 - (E0 - Pmin)/(E0 - Emin); // 0-1
+    const proportion = 1 - (E0 - Pmin)/(E0 - Emin); 
     const tStudy = T * proportion;
-
-    // Pushimi rekomanduar me r
     const tBreak = tStudy * r;
 
-    // Rezultati teksti
     document.getElementById('result').innerHTML =
         `Nga ${T} orë studimi totale, mund të studioj <b>${tStudy.toFixed(2)} orë</b> pa pushim për të ruajtur ${Pmin}% efikasitet.<br>
         Pushimi rekomanduar pas kësaj është <b>${tBreak.toFixed(2)} orë</b> (${(tBreak*60).toFixed(0)} minuta) për të rikuperuar ${r*100}% të efikasitetit.`;
 
-    // Barra vizuale për studim (proporcional me T)
     const studyBar = document.getElementById('studyBar');
     const studyWidth = (tStudy/T)*100;
     studyBar.style.width = studyWidth + '%';
     studyBar.textContent = tStudy.toFixed(1) + 'h';
 
-    // Barra vizuale për pushim (proporcional me T)
     const breakBar = document.getElementById('breakBar');
     const breakWidth = (tBreak/T)*100;
     breakBar.style.width = breakWidth + '%';
     breakBar.textContent = tBreak.toFixed(1) + 'h';
 }
 </script>
-
-<a href="kalkuatori.html" class="back-btn">Kthehu te Kalkulatori</a> 
 
 </body>
 </html>
