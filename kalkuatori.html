@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optimizuesi i Kohës së Studimit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+    margin:0; padding:0; color:#333;
+    display:flex; justify-content:center;
+}
+.container {
+    max-width: 1100px; 
+    margin: 40px 20px; 
+    padding: 40px 30px; 
+    background: #fff; 
+    border-radius: 25px; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+h1 {
+    text-align:center; 
+    color:#006064; 
+    font-weight:700; 
+    font-size:2.5rem; 
+    margin-bottom:25px;
+    text-shadow:1px 1px 3px rgba(0,0,0,0.1);
+}
+h2.section-title{
+    color:#006064; 
+    margin-top:60px; 
+    font-weight:600; 
+    font-size:1.7rem; 
+    border-bottom:2px solid #006064; 
+    padding-bottom:5px;
+}
+.intro{
+    background: #b2ebf2; 
+    padding:25px 20px; 
+    border-radius:20px; 
+    margin-bottom:30px; 
+    font-size:1rem; 
+    line-height:1.6; 
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+    color:#004d51;
+}
+label{display:block; margin-top:15px; font-weight:600; font-size:1rem;}
+input[type=number], input[type=text]{
+    padding:12px; 
+    margin-top:5px; 
+    border-radius:12px; 
+    border:1px solid #ccc; 
+    width:100%; 
+    max-width:220px; 
+    font-size:1rem; 
+    transition: all 0.3s;
+}
+input:focus{
+    border-color:#006064; 
+    box-shadow:0 0 10px rgba(0,96,100,0.25); 
+    outline:none;
+}
+.input-error{border-color:red;}
+button{
+    margin-top:20px; 
+    padding:14px 30px; 
+    border:none; 
+    background: linear-gradient(90deg, #006064, #00acc1); 
+    color:white; 
+    font-weight:600; 
+    font-size:1rem; 
+    border-radius:25px; 
+    cursor:pointer; 
+    transition: all 0.3s;
+}
+button:hover{
+    background: linear-gradient(90deg, #004d51, #0097a7); 
+    transform: translateY(-2px); 
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+.subject{
+    background:#e0f2f1; 
+    padding:20px; 
+    border-radius:20px; 
+    margin-bottom:20px; 
+    box-shadow:0 6px 18px rgba(0,0,0,0.05); 
+    transition: all 0.3s;
+}
+.subject:hover{
+    transform: translateY(-2px); 
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+.field-error{color:red; font-size:0.85rem; min-height:1.2em; margin-top:3px;}
+.chart-container{margin-top:35px; padding:25px; border-radius:20px; background:#f0f9f9; box-shadow:0 6px 20px rgba(0,0,0,0.05);}
+.bar{height:35px; margin:10px 0; color:white; text-align:right; padding-right:10px; border-radius:12px; font-weight:600; font-size:0.95rem; position: relative; transition: all 0.3s;}
+.bar:hover{transform: scaleX(1.05); opacity:0.85; box-shadow:0 4px 15px rgba(0,0,0,0.15);}
+canvas{margin-top:35px; border-radius:20px; background:#f0f9f9; padding:20px; max-height:500px; width:100%; box-shadow:0 6px 20px rgba(0,0,0,0.05);}
+.chart-description{text-align:center; margin-top:10px; color:#555; font-size:0.95rem; font-style:italic;}
+.summary-text{text-align:center; font-size:1rem; margin-top:25px; font-weight:600; color:#006064; white-space:pre-line;}
+.nav{
+    margin-top:50px; 
+    display:flex; 
+    justify-content:center; 
+    gap:20px; 
+    flex-wrap:wrap;
+}
+.nav a{
+    color:#fff; 
+    text-decoration:none; 
+    font-weight:600; 
+    padding:12px 25px; 
+    border-radius:25px; 
+    background: linear-gradient(90deg, #006064, #00acc1);
+    transition: all 0.3s;
+}
+.nav a:hover{
+    background: linear-gradient(90deg, #004d51, #0097a7);
+    transform: translateY(-2px);
+}
+/* Efikasitet Section */
+.efficiency-section{
+    margin-top:50px; padding:25px; border-radius:20px; background:#e8f5e9; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+.efficiency-section h3{color:#2e7d32; margin-bottom:15px; font-size:1.6rem;}
+.efficiency-section p{font-size:1rem; color:#333; line-height:1.6;}
+.efficiency-section a{display:inline-block; margin-top:15px; padding:12px 30px; border-radius:25px; font-weight:600; color:#fff; background:#2e7d32; text-decoration:none; transition: all 0.3s;}
+.efficiency-section a:hover{background:#1b5e20; transform:translateY(-2px);}
+@media(max-width:768px){
+    .container{padding:25px;} 
+    h1{font-size:2rem;} 
+    h2.section-title{font-size:1.4rem;} 
+    input[type=number],input[type=text]{max-width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Optimizuesi i Kohës së Studimit</h1>
+
+<div class="intro">
+Ky kalkulator ndihmon të planifikoni kohën optimale për çdo lëndë bazuar në prioritet, vështirësi dhe përgatitje. <br>
+1️⃣ Vendosni totalin e orëve të studimit.<br>
+2️⃣ Zgjidhni numrin e lëndëve.<br>
+3️⃣ Shkruani emrin, prioritetin, vështirësinë dhe përgatitjen për secilën lëndë.<br>
+4️⃣ Klikoni "Llogarit Kohën Optimale" dhe shikoni rezultatet.
+</div>
+
+<label>Koha totale e studimit (orë):</label>
+<input type="number" id="totalTime" value="6" step="0.1">
+<div id="totalTimeError" class="field-error"></div>
+
+<label>Numri i lëndëve:</label>
+<input type="number" id="numSubjects" value="3" min="1">
+<div id="numSubjectsError" class="field-error"></div>
+
+<button onclick="generateSubjects()">Gjenero Lëndët</button>
+<div id="subjectsContainer"></div>
+<button onclick="calculateTime()">Llogarit Kohën Optimale</button>
+
+<h2 class="section-title">Rezultatet</h2>
+<div id="oldGraph" class="chart-container"></div>
+
+<h2 class="section-title">Grafiku </h2>
+<canvas id="newChartCanvas"></canvas>
+
+<div id="summaryText" class="summary-text"></div>
+
+<!-- Efikasiteti -->
+<div class="efficiency-section">
+<h3>Mëso Efikasitetin tënd të Studimit</h3>
+<p>Shkoni në seksionin e Efikasitetit për të matur sa efektiv është studimi tuaj, monitoroni përqendrimin dhe përdorni teknika për të përmirësuar produktivitetin.</p>
+<a href="Efikasitet.html">Mat Efikasitetin Tënd</a>
+</div>
+
+<div class="nav">
+<a href="index.html">Faqja Kryesore</a>
+<a href="formulat.html">Formulat</a>
+<a href="Efikasitet.html">Efikasiteti</a>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function generateSubjects(){
+    let n=parseInt(document.getElementById('numSubjects').value);
+    if(n<1){ n=1; document.getElementById('numSubjects').value=1; }
+    const container=document.getElementById('subjectsContainer');
+    container.innerHTML='';
+    for(let i=1;i<=n;i++){
+        const div=document.createElement('div'); div.className='subject';
+        div.innerHTML=`<b>Lënda ${i}</b><br>
+<label>Emri i lëndës:</label><input type='text' class='subjectName'><div class='field-error name-error'></div>
+<label>Prioriteti (1-5):</label><input type='number' min='1' max='5' step='0.1' class='priority'><div class='field-error priority-error'></div>
+<label>Vështirësia (1-5):</label><input type='number' min='1' max='5' step='0.1' class='difficulty'><div class='field-error difficulty-error'></div>
+<label>Përgatitja (1-5):</label><input type='number' min='1' max='5' step='0.1' class='preparedness'><div class='field-error preparedness-error'></div>`;
+        container.appendChild(div);
+    }
+}
+generateSubjects();
+
+let newChart=null;
+function calculateTime(){
+    const T=parseFloat(document.getElementById('totalTime').value);
+    const namesEls=Array.from(document.getElementsByClassName('subjectName'));
+    const prioritiesEls=Array.from(document.getElementsByClassName('priority'));
+    const difficultiesEls=Array.from(document.getElementsByClassName('difficulty'));
+    const preparednessEls=Array.from(document.getElementsByClassName('preparedness'));
+    document.getElementById('totalTimeError').textContent='';
+    namesEls.forEach(el=>{
+        const row=el.parentElement;
+        row.querySelectorAll('.field-error').forEach(fe=>fe.textContent='');
+        row.querySelectorAll('input').forEach(inp=>inp.classList.remove('input-error'));
+    });
+    let hasError=false;
+    if(isNaN(T)||T<=0){document.getElementById('totalTimeError').textContent='Vendosni një kohë valide.'; hasError=true;}
+    for(let i=0;i<namesEls.length;i++){
+        const row=namesEls[i].parentElement;
+        const nameVal=namesEls[i].value.trim();
+        const pVal=parseFloat(prioritiesEls[i].value);
+        const dVal=parseFloat(difficultiesEls[i].value);
+        const eVal=parseFloat(preparednessEls[i].value);
+        if(!nameVal){row.querySelector('.name-error').textContent='Vendosni emrin e lëndës.'; namesEls[i].classList.add('input-error'); hasError=true;}
+        if(isNaN(pVal)||pVal<1||pVal>5){row.querySelector('.priority-error').textContent='Prioriteti duhet të jetë 1–5.'; prioritiesEls[i].classList.add('input-error'); hasError=true;}
+        if(isNaN(dVal)||dVal<1||dVal>5){row.querySelector('.difficulty-error').textContent='Vështirësia duhet të jetë 1–5.'; difficultiesEls[i].classList.add('input-error'); hasError=true;}
+        if(isNaN(eVal)||eVal<1||eVal>5){row.querySelector('.preparedness-error').textContent='Përgatitja duhet të jetë 1–5.'; preparednessEls[i].classList.add('input-error'); hasError=true;}
+    }
+    if(hasError){return;}
+    const names=namesEls.map(el=>el.value.trim());
+    const priorities=prioritiesEls.map(i=>parseFloat(i.value));
+    const difficulties=difficultiesEls.map(i=>parseFloat(i.value));
+    const preparedness=preparednessEls.map(i=>parseFloat(i.value));
+    let N=priorities.map((p,idx)=>(p*difficulties[idx])/preparedness[idx]);
+    const Ntotal=N.reduce((a,b)=>a+b,0);
+    let t=N.map(n=>T*n/Ntotal);
+
+    const colors=['#00796B','#26A69A','#00ACC1','#0288D1','#1976D2','#3949AB','#5C6BC0','#8E24AA','#AD1457','#C2185B'];
+
+    const oldGraph=document.getElementById('oldGraph'); oldGraph.innerHTML='';
+    t.forEach((ti,idx)=>{
+        const bar=document.createElement('div'); bar.className='bar';
+        bar.style.width=(ti/T*100)+'%';
+        bar.style.backgroundColor=colors[idx % colors.length];
+        bar.textContent=`${names[idx]}: ${ti.toFixed(2)} h`;
+        oldGraph.appendChild(bar);
+    });
+
+    const ctx=document.getElementById('newChartCanvas').getContext('2d');
+    if(newChart) newChart.destroy();
+    newChart=new Chart(ctx,{
+        type:'bar',
+        data:{labels:names, datasets:[{label:'Orët e Studimit', data:t, backgroundColor:colors.slice(0,names.length), borderRadius:15}]},
+        options:{responsive:true, animation:{duration:1000}, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:T, title:{display:true,text:'Orët (maks '+T+'h)'}}, x:{title:{display:true,text:'Lëndët'}}}}
+    });
+
+    // Rregullo kthimin e orëve në orë dhe minuta
+    const summary = document.getElementById('summaryText');
+    let summaryText = `Për ${T} orë studimi total, duhet të studiosh:\n`;
+    t.forEach((ti, idx)=>{
+        const hours = Math.floor(ti);
+        const minutes = Math.round((ti - hours) * 60);
+        summaryText += `- ${names[idx]}: ${hours} h e ${minutes} min\n`;
+    });
+    summary.textContent = summaryText;
+}
+</script>
+</body>
+</html>

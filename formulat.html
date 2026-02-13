@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulat Matematikore - Smart Study Optimizer</title>
+
+<style>
+body{
+  font-family:'Segoe UI',sans-serif;
+  padding:40px;
+  background:linear-gradient(135deg , #c5b4f0, #dbe6f6);
+  line-height:1.7;
+  color:#333;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:2.3em;
+}
+
+.subtitle{
+  text-align:center;
+  max-width:750px;
+  margin:auto;
+  margin-bottom:40px;
+  font-size:1.1em;
+  opacity:0.85;
+}
+
+.section{
+  background:white;
+  padding:25px;
+  margin:25px auto;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  max-width:850px;
+  transition:transform 0.2s ease;
+}
+
+.section:hover{
+  transform:translateY(-4px);
+}
+
+.section h2{
+  border-left:6px solid #4CAF50;
+  padding-left:10px;
+}
+
+.formula{
+  background:#0f172a;
+  color:#38bdf8;
+  padding:15px;
+  border-radius:10px;
+  font-family:Consolas,monospace;
+  font-size:1.25em;
+  text-align:center;
+  margin:15px 0;
+  letter-spacing:1px;
+}
+
+ul{ margin-top:10px; }
+li{ margin-bottom:5px; }
+
+.footer{
+  text-align:center;
+  margin-top:50px;
+  opacity:0.6;
+  font-size:0.9em;
+}
+
+
+.footer-buttons {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.nav-btn {
+    background: linear-gradient(135deg, blue, #2ecc71);
+    color: white;
+    text-decoration: none;
+    padding: 20px 40px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.nav-btn:hover {
+    background: linear-gradient(135deg, #66fcd2, #27ae60);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    input { width: 60px; }
+    button { padding: 14px 24px; font-size: 0.95em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+    .footer-buttons { flex-direction: column; gap: 18px; }
+    .nav-btn { padding: 16px 28px; font-size: 1em; }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>📘 Formulat Matematikore të Sistemit të Studimit</h1>
+<p class="subtitle">
+Ky sistem përdor modele matematikore për të optimizuar kohën e studimit duke marrë parasysh
+prioritetin e lëndëve, vështirësinë, përgatitjen dhe rënien e efikasitetit mendore me kalimin e kohës.
+Më poshtë janë formulat kryesore që përdoren për të llogaritur kohën optimale të studimit dhe pushimit.
+</p>
+
+
+<div class="section">
+  <h2>Kushti i kohes totale </h2>
+<p>Kohët e ndara për secilën lëndë duhet të përbëjnë totalin e orëve të disponueshme:</p>
+<div class="formula">t1 + t2 + ... + tn = T</div>
+</div>
+
+<div class="section">
+<h2>📐 Indeksi i Nevojës për Studim</h2>
+<div class="formula">N<sub>i</sub> = (P<sub>i</sub> × V<sub>i</sub>) / G<sub>i</sub></div>
+<ul>
+<li>P<sub>i</sub> = Prioriteti i lëndës</li>
+<li>V<sub>i</sub> = Vështirësia e lëndës</li>
+<li>G<sub>i</sub> = Përgatitja e nxënësit për lëndën</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>⚖️ Totali i nevojave</h2>
+<div class="formula">N<sub>total</sub> = Σ N<sub>i</sub></div>
+<p>Kjo shpreh totalin e “nevojave” relative për të gjitha lëndët.</p>
+</div>
+
+<div class="section">
+<h2>🧮 Koha që nevojitet për çdo lëndë</h2>
+<div class="formula">t<sub>i</sub> = T × (N<sub>i</sub> / N<sub>total</sub>)</div>
+<ul>
+<li>T = Koha totale për studim</li>
+<li>t<sub>i</sub> = Koha që duhet ti kushtohet lëndës "i"</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>⏳ Rënia e produktivitetit gjatë studimit</h2>
+Studimi i vazhdueshëm ul produktivitetin sipas funksionit eksponencial:
+<div class="formula">Efikasiteti(t) = 100 e<sup>−0.15t</sup></div>
+<ul>
+<li>t = Koha pa pushim (orë)</li>
+<li>e ≈ 2.718 (numri i Euler-it)</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>📊 Efikasiteti total i sesionit të studimit</h2>
+<div class="formula">E<sub>total</sub> = Σ (t<sub>i</sub> × Efikasiteti(t<sub>i</sub>))</div>
+<p>Kjo mat efektivitetin e vërtetë duke marrë parasysh lodhjen mendore.</p>
+</div>
+
+<div class="section">
+<h2>🧠 Proporcioni i studimit pa pushim</h2>
+<div class="formula">proportion = 1 − (E<sub>maks</sub> − P<sub>min</sub>) / (E<sub>maks</sub> − E<sub>min</sub>)</div>
+<ul>
+<li>E<sub>maks</sub> = 95% (efikasitet maksimal)</li>
+<li>E<sub>min</sub> = 50% (efikasitet minimal i lejueshëm)</li>
+<li>P<sub>min</sub> = Efikasiteti minimal i dëshiruar nga përdoruesi</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>⏱ Koha optimale pa pushim</h2>
+Me këtë ekuacion, koha optimale për studim pa pushim llogaritet si:
+<div class="formula">t<sub>studim</sub> = T × proportion</div>
+</div>
+
+<div class="section">
+<h2>☕ Koha e pushimit të rekomanduar</h2>
+<div class="formula">t<sub>pushim</sub> = t<sub>studim</sub> × r</div>
+<ul>
+<li>r = Përqindja e rikuperimit të efikasitetit pas pushimit</li>
+</ul>
+</div>
+
+<!-- Footer Buttons -->
+<div class="footer-buttons">
+  <a href="index.html" class="nav-btn"> Faqja Kryesore</a>
+  <a href="kalkuatori.html" class="nav-btn"> Kalkulatori</a>
+  <a href="Efikasitet.html" class="nav-btn"> Efikasitet</a>
+</div>
+
+<div class="footer">
+Model Matematik për Optimizimin e Ngarkesës Mendore © Smart Study System
+@leka_emanuel4 
+
+</div>
+
+</body>
+</html>
